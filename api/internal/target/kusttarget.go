@@ -376,7 +376,7 @@ func (kt *KustTarget) configureExternalTransformers(transformers []string) ([]*r
 	if err != nil {
 		return nil, err
 	}
-	return kt.pLdr.LoadTransformers(kt.ldr, kt.validator, ra.ResMap())
+	return kt.pLdr.LoadTransformers(kt.ldr, kt.validator, ra.ResMap(), kt)
 }
 
 func (kt *KustTarget) runValidators(ra *accumulator.ResAccumulator) error {

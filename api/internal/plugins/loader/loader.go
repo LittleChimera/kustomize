@@ -87,10 +87,10 @@ func (l *Loader) LoadGenerator(
 }
 
 func (l *Loader) LoadTransformers(
-	ldr ifc.Loader, v ifc.Validator, rm resmap.ResMap) ([]*resmap.TransformerWithProperties, error) {
+	ldr ifc.Loader, v ifc.Validator, rm resmap.ResMap, kt resmap.KustTargetInterface) ([]*resmap.TransformerWithProperties, error) {
 	var result []*resmap.TransformerWithProperties
 	for _, res := range rm.Resources() {
-		t, err := l.LoadTransformer(ldr, v, res)
+		t, err := l.LoadTransformer(ldr, v, res, kt)
 		if err != nil {
 			return nil, err
 		}
@@ -104,8 +104,8 @@ func (l *Loader) LoadTransformers(
 }
 
 func (l *Loader) LoadTransformer(
-	ldr ifc.Loader, v ifc.Validator, res *resource.Resource) (*resmap.TransformerWithProperties, error) {
-	c, err := l.loadAndConfigurePlugin(ldr, v, res, nil)
+	ldr ifc.Loader, v ifc.Validator, res *resource.Resource, kt resmap.KustTargetInterface) (*resmap.TransformerWithProperties, error) {
+	c, err := l.loadAndConfigurePlugin(ldr, v, res, kt)
 	if err != nil {
 		return nil, err
 	}
